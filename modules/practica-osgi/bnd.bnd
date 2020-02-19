@@ -1,0 +1,4 @@
+Bundle-Name: practica-osgi
+Bundle-SymbolicName: com.liferay.formacion.osgi
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.formacion.osgi.constants

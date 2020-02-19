@@ -1,0 +1,4 @@
+Bundle-Name: gi2
+Bundle-SymbolicName: gi2
+Bundle-Version: 1.0.0
+Export-Package: gi2.constants

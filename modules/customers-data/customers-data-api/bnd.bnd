@@ -1,0 +1,10 @@
+Bundle-Name: customers-data-api
+Bundle-SymbolicName: com.liferay.trainin.customers.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.trainin.customers.exception,\
+	com.liferay.trainin.customers.model,\
+	com.liferay.trainin.customers.service,\
+	com.liferay.trainin.customers.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../customers-data-service/service.xml

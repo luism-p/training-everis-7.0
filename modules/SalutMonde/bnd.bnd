@@ -1,0 +1,4 @@
+Bundle-Name: SalutMonde
+Bundle-SymbolicName: com.liferay.curso.salut
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.curso.salut.constants

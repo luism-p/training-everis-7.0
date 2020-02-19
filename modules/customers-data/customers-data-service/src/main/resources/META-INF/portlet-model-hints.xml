@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.trainin.customers.model.Customer">
+		<field name="uuid" type="String" />
+		<field name="customerId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="address" type="String" />
+		<field name="phoneNumber" type="String" />
+	</model>
+</model-hints>
