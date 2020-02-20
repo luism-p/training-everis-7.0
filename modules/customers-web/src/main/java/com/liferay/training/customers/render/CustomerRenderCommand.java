@@ -25,38 +25,37 @@ import java.util.List;
 )
 public class CustomerRenderCommand implements MVCRenderCommand {
 
-        @Reference
-        private CustomerLocalService _customerLocalService;
+    @Reference
+    private CustomerLocalService _customerLocalService;
 
-        @Override
-        public String render(RenderRequest renderRequest, RenderResponse renderResponse)
-                throws PortletException {
+    @Override
+    public String render(RenderRequest renderRequest, RenderResponse renderResponse)
+            throws PortletException {
 
-                String renderEdit = ParamUtil.getString(renderRequest, "renderEdit", StringPool.BLANK);
-                long customerId = ParamUtil.getLong(renderRequest, CustomersConstans.CUSTOMER_ID, 0l);
+        String renderEdit = ParamUtil.getString(renderRequest, "renderEdit", StringPool.BLANK);
+        long customerId = ParamUtil.getLong(renderRequest, CustomersConstans.CUSTOMER_ID, 0l);
 
-                if(customerId > 0 && renderEdit.equals("renderEdit")){
-                        String name = StringPool.BLANK;
-                        String address = StringPool.BLANK;
-                        String phoneNumber = StringPool.BLANK;
-                        Customer customer = _customerLocalService.fetchCustomer(customerId);
+        if(customerId > 0 && renderEdit.equals("renderEdit")){
+            String name = StringPool.BLANK;
+            String address = StringPool.BLANK;
+            String phoneNumber = StringPool.BLANK;
+            Customer customer = _customerLocalService.fetchCustomer(customerId);
 
-                        name = customer.getName();
-                        address = customer.getAddress();
-                        phoneNumber = customer.getPhoneNumber();
+            name = customer.getName();
+            address = customer.getAddress();
+            phoneNumber = customer.getPhoneNumber();
 
-                        renderRequest.setAttribute(CustomersConstans.CUSTOMER_NAME,name);
-                        renderRequest.setAttribute(CustomersConstans.CUSTOMER_ADDRESS,address);
-                        renderRequest.setAttribute(CustomersConstans.CUSTOMER_PHONE,phoneNumber);
-                        return CustomersConstans.EDIT_JSP;
-                }else{
-                        List<Customer> customers = _customerLocalService.getCustomers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-                        renderRequest.setAttribute(CustomersConstans.LIST_CUSTOMERS, customers);
+            renderRequest.setAttribute(CustomersConstans.CUSTOMER_NAME,name);
+            renderRequest.setAttribute(CustomersConstans.CUSTOMER_ADDRESS,address);
+            renderRequest.setAttribute(CustomersConstans.CUSTOMER_PHONE,phoneNumber);
 
-                        return CustomersConstans.VIEW_JSP;
-                }
+            return CustomersConstans.EDIT_JSP;
+        }else{
+            List<Customer> customers = _customerLocalService.getCustomers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+            renderRequest.setAttribute(CustomersConstans.LIST_CUSTOMERS, customers);
 
-
-
+            return CustomersConstans.VIEW_JSP;
         }
+
+    }
 }
