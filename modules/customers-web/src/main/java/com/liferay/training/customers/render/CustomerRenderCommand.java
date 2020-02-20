@@ -48,7 +48,6 @@ public class CustomerRenderCommand implements MVCRenderCommand {
                         renderRequest.setAttribute(CustomersConstans.CUSTOMER_NAME,name);
                         renderRequest.setAttribute(CustomersConstans.CUSTOMER_ADDRESS,address);
                         renderRequest.setAttribute(CustomersConstans.CUSTOMER_PHONE,phoneNumber);
-
                         return CustomersConstans.EDIT_JSP;
                 }else{
                         List<Customer> customers = _customerLocalService.getCustomers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
