@@ -20,5 +20,5 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.trainin.customers.service.CustomerLocalService" %>
 
 <liferay-theme:defineObjects />
-
+    <liferay-ui:success key="success" message="Greeting saved successfully!"/>
 <portlet:defineObjects />

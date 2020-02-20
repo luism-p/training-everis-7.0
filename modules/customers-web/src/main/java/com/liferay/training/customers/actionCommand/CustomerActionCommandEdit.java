@@ -1,7 +1,7 @@
 package com.liferay.training.customers.actionCommand;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.trainin.customers.model.Customer;
@@ -24,19 +24,14 @@ import java.util.Date;
                 "mvc.command.name=" + CustomersConstans.CUSTOMER_ACTION_COMMAND_EDIT
         },
         service = MVCActionCommand.class)
-public class CustomerActionCommand implements MVCActionCommand {
+public class CustomerActionCommandEdit implements MVCActionCommand {
     @Reference
     private CustomerLocalService _customerLocalService;
 
-    @Override public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse)
+    @Override
+    public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse)
             throws PortletException {
-        String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-        if(cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)){
             updateCustomer(actionRequest);
-        }else if(cmd.equals(Constants.DELETE)){
-            deleteCustomer(actionRequest);
-        }
         return false;
     }
 
@@ -55,18 +50,17 @@ public class CustomerActionCommand implements MVCActionCommand {
             customer.setPhoneNumber(phoneNumber);
             customer.setCreateDate(now);
             _customerLocalService.addCustomerWithoutID(customer);
+            SessionMessages.add(actionRequest, "success");
 
         }else{
             Customer customer = _customerLocalService.fetchCustomer(customerId);
-            customer.setCustomerId(customerId);
             customer.setName(name);
             customer.setAddress(address);
             customer.setPhoneNumber(phoneNumber);
-            customer.setCreateDate(now);
+            customer.setModifiedDate(now);
             _customerLocalService.updateCustomer(customer);
         }
     }
 
-    private void deleteCustomer(ActionRequest actionRequest) {
-    }
+
 }

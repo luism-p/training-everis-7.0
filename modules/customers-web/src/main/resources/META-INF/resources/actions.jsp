@@ -10,12 +10,12 @@
     }
 %>
 
-<portlet:renderURL var="editUrl">
-    <portlet:param name="mvcPath" value="/edit.jsp"/>
+<portlet:renderURL var="editUrl" >
+    <portlet:param name="renderEdit" value="renderEdit"/>
     <portlet:param name="redirect" value="<%= themeDisplay.getURLCurrent()%>"/>
-    <portlet:param name="customerId" value="<%= customer%>"/>
-
+    <portlet:param name="customerId" value="<%=String.valueOf(customer.getCustomerId())%>"/>
 </portlet:renderURL>
+
 <portlet:actionURL var="removeUrl" name="<%=CustomersConstans.CUSTOMER_ACTION_COMMAND_REMOVE%>">
     <portlet:param name="redirect" value="<%= themeDisplay.getURLCurrent()%>"/>
     <portlet:param name="customerId" value="<%= String.valueOf(customer.getCustomerId())%>"/>

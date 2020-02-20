@@ -15,6 +15,7 @@
 		<liferay-ui:search-container-column-text property="address"/>
 		<liferay-ui:search-container-column-text property="phoneNumber"/>
 		<liferay-ui:search-container-column-text property="modifiedDate"/>
+		<liferay-ui:search-container-column-text property="customerId"/>
 		<liferay-ui:search-container-column-jsp path="/actions.jsp" cssClass="entry-action" valign="top" />
 	</liferay-ui:search-container-row>
 	<liferay:search-iterator />

@@ -1,6 +1,8 @@
 package com.liferay.training.customers.actionCommand;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -28,7 +30,8 @@ public class CustomerActionCommandRemove implements MVCActionCommand {
     @Reference
     private CustomerLocalService _customerLocalService;
 
-    @Override public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse)
+    @Override
+    public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse)
             throws PortletException {
 
             deleteCustomer(actionRequest);
@@ -36,8 +39,17 @@ public class CustomerActionCommandRemove implements MVCActionCommand {
         return false;
     }
 
-
-
     private void deleteCustomer(ActionRequest actionRequest) {
+        long customerId = ParamUtil.getLong(actionRequest, CustomersConstans.CUSTOMER_ID, 0l);
+
+        if (customerId > 0) {
+            try {
+                _customerLocalService.deleteCustomer(customerId);
+                SessionMessages.add(actionRequest, "success");
+            } catch (PortalException e) {
+
+                e.printStackTrace();
+            }
+        }
     }
 }

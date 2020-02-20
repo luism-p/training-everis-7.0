@@ -2,6 +2,8 @@ package com.liferay.training.customers.render;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.trainin.customers.model.Customer;
 import com.liferay.trainin.customers.service.CustomerLocalService;
 import com.liferay.training.customers.constants.CustomersConstans;
@@ -29,10 +31,32 @@ public class CustomerRenderCommand implements MVCRenderCommand {
         @Override
         public String render(RenderRequest renderRequest, RenderResponse renderResponse)
                 throws PortletException {
-                List<Customer> customers = _customerLocalService.getCustomers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-                renderRequest.setAttribute(CustomersConstans.LIST_CUSTOMERS, customers);
-                renderRequest.setAttribute(CustomersConstans.CUSTOMER_LOCAL_SERVICE, _customerLocalService);
 
-                return CustomersConstans.VIEW_JSP;
+                String renderEdit = ParamUtil.getString(renderRequest, "renderEdit", StringPool.BLANK);
+                long customerId = ParamUtil.getLong(renderRequest, CustomersConstans.CUSTOMER_ID, 0l);
+
+                if(customerId > 0 && renderEdit.equals("renderEdit")){
+                        String name = StringPool.BLANK;
+                        String address = StringPool.BLANK;
+                        String phoneNumber = StringPool.BLANK;
+                        Customer customer = _customerLocalService.fetchCustomer(customerId);
+
+                        name = customer.getName();
+                        address = customer.getAddress();
+                        phoneNumber = customer.getPhoneNumber();
+
+                        renderRequest.setAttribute(CustomersConstans.CUSTOMER_NAME,name);
+                        renderRequest.setAttribute(CustomersConstans.CUSTOMER_ADDRESS,address);
+                        renderRequest.setAttribute(CustomersConstans.CUSTOMER_PHONE,phoneNumber);
+                        return CustomersConstans.EDIT_JSP;
+                }else{
+                        List<Customer> customers = _customerLocalService.getCustomers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+                        renderRequest.setAttribute(CustomersConstans.LIST_CUSTOMERS, customers);
+
+                        return CustomersConstans.VIEW_JSP;
+                }
+
+
+
         }
 }
