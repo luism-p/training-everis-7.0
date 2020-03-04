@@ -29,7 +29,7 @@ import java.io.IOException;
 		"javax.portlet.name=" + EventSenderPortletKeys.EVENTSENDER,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.supported-publishing-event=say.hello;http://my.events.tld/ns"
+		"javax.portlet.supported-publishing-event=say.hello;keyEvent"
 	},
 	service = Portlet.class
 )
@@ -38,7 +38,7 @@ public class EventSenderPortlet extends MVCPortlet {
 	@Override
 	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
-		QName qname = new QName("http://my.events.tld/ns", "say.hello");
+		QName qname = new QName("keyEvent", "say.hello");
 		actionResponse.setEvent(qname, "Hello World!");
 		super.processAction(actionRequest, actionResponse);
 	}

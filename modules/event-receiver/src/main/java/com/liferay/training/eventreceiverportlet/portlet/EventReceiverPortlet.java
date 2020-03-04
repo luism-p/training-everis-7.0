@@ -23,13 +23,13 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.name=" + EventReceiverPortletKeys.EVENTRECEIVER,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.supported-processing-event=say.hello;http://my.events.tld/ns"
+		"javax.portlet.supported-processing-event=say.hello;keyEvent"
 	},
 	service = Portlet.class
 )
 public class EventReceiverPortlet extends MVCPortlet {
 
-	@ProcessEvent(qname ="{http://my.events.tld/ns}say.hello")
+	@ProcessEvent(qname ="{keyEvent}say.hello")
 	public void receiveEvent(EventRequest eventRequest, EventResponse eventResponse){
 
 		Event event = eventRequest.getEvent();
