@@ -1,5 +1,7 @@
 package com.liferay.training.eventsenderportlet.portlet;
 
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.training.eventsenderportlet.constants.EventSenderPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -38,8 +40,9 @@ public class EventSenderPortlet extends MVCPortlet {
 	@Override
 	public void processAction(ActionRequest actionRequest, ActionResponse actionResponse)
 			throws IOException, PortletException {
+		String message = ParamUtil.get(actionRequest, "message", StringPool.BLANK);
 		QName qname = new QName("keyEvent", "say.hello");
-		actionResponse.setEvent(qname, "Hello World!");
+		actionResponse.setEvent(qname, message);
 		super.processAction(actionRequest, actionResponse);
 	}
 }
