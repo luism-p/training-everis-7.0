@@ -1,6 +1,7 @@
-
 <%@ include file="/init.jsp" %>
 
+<liferay-ui:success key="customer-deleted" message="Customer deled successfully!"/>
+<liferay-ui:error key="could-not-delete" message="Customer not deleted!"/>
 
 <portlet:renderURL var="editUrl">
 	<portlet:param name="mvcPath" value="/edit.jsp"/>

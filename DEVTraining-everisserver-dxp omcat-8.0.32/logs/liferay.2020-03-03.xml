@@ -1,0 +1,84 @@
+<log4j:event logger="com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper" timestamp="1583222808341" level="ERROR" thread="localhost-startStop-1">
+<log4j:message><![CDATA[Unable to configure the class loader for the module framework]]></log4j:message>
+<log4j:throwable><![CDATA[java.io.IOException: El nombre de archivo, el nombre de directorio o la sintaxis de la etiqueta del volumen no son correctos
+	at java.io.WinNTFileSystem.canonicalize0(Native Method)
+	at java.io.WinNTFileSystem.canonicalize(WinNTFileSystem.java:428)
+	at java.io.File.getCanonicalPath(File.java:618)
+	at com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper._getClassPathURLs(ModuleFrameworkAdapterHelper.java:134)
+	at com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper.getClassLoader(ModuleFrameworkAdapterHelper.java:58)
+	at com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper.<init>(ModuleFrameworkAdapterHelper.java:74)
+	at com.liferay.portal.module.framework.ModuleFrameworkUtilAdapter.<clinit>(ModuleFrameworkUtilAdapter.java:144)
+	at com.liferay.portal.spring.context.PortalContextLoaderListener.contextInitialized(PortalContextLoaderListener.java:245)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4812)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5255)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:147)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:725)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:701)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:585)
+	at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1794)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+]]></log4j:throwable>
+<log4j:locationInfo class="com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper" method="getClassLoader" file="ModuleFrameworkAdapterHelper.java" line="63"/>
+</log4j:event>
+
+<log4j:event logger="com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper" timestamp="1583222808364" level="ERROR" thread="localhost-startStop-1">
+<log4j:message><![CDATA[Unable to load the module framework]]></log4j:message>
+<log4j:locationInfo class="com.liferay.portal.module.framework.ModuleFrameworkAdapterHelper" method="&lt;init&gt;" file="ModuleFrameworkAdapterHelper.java" line="77"/>
+</log4j:event>
+
+<log4j:event logger="com.liferay.portal.spring.context.PortalContextLoaderListener" timestamp="1583222808392" level="ERROR" thread="localhost-startStop-1">
+<log4j:message><![CDATA[java.lang.NullPointerException]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.NullPointerException
+	at com.liferay.portal.kernel.servlet.DirectServletRegistryUtil.clearServlets(DirectServletRegistryUtil.java:27)
+	at com.liferay.portal.spring.context.PortalContextLoaderListener.contextDestroyed(PortalContextLoaderListener.java:135)
+	at org.apache.catalina.core.StandardContext.listenerStop(StandardContext.java:4859)
+	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5478)
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:224)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:159)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:725)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:701)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:585)
+	at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1794)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+]]></log4j:throwable>
+<log4j:locationInfo class="com.liferay.portal.kernel.log.SanitizerLogWrapper" method="error" file="SanitizerLogWrapper.java" line="114"/>
+</log4j:event>
+
+<log4j:event logger="com.liferay.portal.spring.context.PortalContextLoaderListener" timestamp="1583222808394" level="ERROR" thread="localhost-startStop-1">
+<log4j:message><![CDATA[java.lang.NullPointerException]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.NullPointerException
+	at com.liferay.portal.kernel.deploy.hot.HotDeployUtil.reset(HotDeployUtil.java:53)
+	at com.liferay.portal.spring.context.PortalContextLoaderListener.contextDestroyed(PortalContextLoaderListener.java:142)
+	at org.apache.catalina.core.StandardContext.listenerStop(StandardContext.java:4859)
+	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5478)
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:224)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:159)
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:725)
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:701)
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:717)
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:585)
+	at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1794)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+]]></log4j:throwable>
+<log4j:locationInfo class="com.liferay.portal.kernel.log.SanitizerLogWrapper" method="error" file="SanitizerLogWrapper.java" line="114"/>
+</log4j:event>
+
+<log4j:event logger="com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" timestamp="1583222808397" level="ERROR" thread="localhost-startStop-1">
+<log4j:message><![CDATA[BeanLocator is null]]></log4j:message>
+<log4j:locationInfo class="com.liferay.portal.kernel.log.SanitizerLogWrapper" method="error" file="SanitizerLogWrapper.java" line="109"/>
+</log4j:event>
+
