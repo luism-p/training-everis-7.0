@@ -4,8 +4,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.trainin.customers.service.CustomerLocalService;
 import com.liferay.training.customers.constants.CustomersConstans;
 import org.osgi.service.component.annotations.Component;
@@ -44,9 +46,11 @@ public class CustomerActionCommandRemove implements MVCActionCommand {
         if (customerId > 0) {
             try {
                 _customerLocalService.deleteCustomer(customerId);
-                SessionMessages.add(actionRequest, "success");
+                SessionMessages.add(actionRequest, "customer-deleted");
             } catch (PortalException e) {
-
+                SessionErrors.add(actionRequest, "could-not-delete");
+                SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest)
+                        + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
                 LOG.debug("error prtletException: "+ e.getClass()+" ->  "+e.getMessage());
             }
 

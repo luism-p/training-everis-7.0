@@ -1,12 +1,18 @@
-
 <%@ include file="init.jsp"%>
 
+<liferay-ui:success key="customer-added" message="Customer created successfully!"/>
+<liferay-ui:success key="customer-update" message="Customer update successfully!"/>
+<liferay-ui:error key="invalid-data" message="Please enter valid data!"/>
+
 <%
-    String redirect = ParamUtil.getString(request, "redirect");
     Customer customer = null;
 
 %>
 <portlet:actionURL var="actionEdit" name="<%=CustomersConstans.CUSTOMER_ACTION_COMMAND_EDIT%>"/>
+<portlet:actionURL var="redirect" name="<%=ParamUtil.getString(request, "redirect")%>"/>
+<portlet:renderURL var="cancelURL">
+    <portlet:param name="mvpPath" value="/view.jsp"/>
+</portlet:renderURL>
 
 <aui:form action="${actionEdit}">
     <aui:model-context bean="<%=customer%>" model="<%=Customer.class%>"/>
@@ -21,17 +27,11 @@
             <aui:validator name="required" errorMessage="please enter valid address"/>
         </aui:input>
         <aui:input id="phoneNumber" name="phoneNumber" type="text" value="${customerPhone}">
-            <aui:validator name="required" errorMessage="please enter valid phone"/>
-            <aui:validator name="custom" errorMessage="please enter valid phone">
-                function (val,fieldNode,ruleValue) {
-                    return /(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/.test(val);
-                }
-            </aui:validator>
         </aui:input>
     </aui:fieldset>
 
     <aui:button-row>
         <aui:button type="submit" />
-        <aui:button href="<%=redirect%>" type="cancel" />
+        <aui:button href="${cancelURL}" type="cancel" />
     </aui:button-row>
 </aui:form>

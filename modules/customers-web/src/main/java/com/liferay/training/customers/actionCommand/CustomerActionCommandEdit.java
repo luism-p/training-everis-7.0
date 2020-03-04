@@ -3,8 +3,10 @@ package com.liferay.training.customers.actionCommand;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.trainin.customers.model.Customer;
 import com.liferay.trainin.customers.service.CustomerLocalService;
@@ -35,11 +37,11 @@ public class CustomerActionCommandEdit implements MVCActionCommand {
     @Override
     public boolean processAction(ActionRequest actionRequest, ActionResponse actionResponse)
             throws PortletException {
-            updateCustomer(actionRequest);
+            updateCustomer(actionRequest, actionResponse);
         return false;
     }
 
-    private void updateCustomer(ActionRequest actionRequest) throws PortletException {
+    private void updateCustomer(ActionRequest actionRequest, ActionResponse actionResponse) throws PortletException {
         long customerId = ParamUtil.getLong(actionRequest, "customerId", 0L);
         String name = ParamUtil.getString(actionRequest, "name", StringPool.BLANK);
         String address = ParamUtil.getString(actionRequest, "address", StringPool.BLANK);
@@ -56,10 +58,14 @@ public class CustomerActionCommandEdit implements MVCActionCommand {
 
             if(CustomerValidator.isCustomerValid(customer)) {
                 _customerLocalService.addCustomerWithoutID(customer);
-                SessionMessages.add(actionRequest, "success");
+                SessionMessages.add(actionRequest, "customer-added");
             }else{
-                throw new PortletException("invalid from data");
+                SessionErrors.add(actionRequest, "invalid-data");
+                SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest)
+                + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
             }
+
+            actionResponse.setRenderParameter("mvcPath", "/edit.jsp");
 
 
         }else{
@@ -70,11 +76,14 @@ public class CustomerActionCommandEdit implements MVCActionCommand {
             customer.setModifiedDate(now);
             if(CustomerValidator.isCustomerValid(customer)) {
                 _customerLocalService.updateCustomer(customer);
-                SessionMessages.add(actionRequest, "success");
+                SessionMessages.add(actionRequest, "customer-update");
             }else{
-                throw new PortletException("invalid from data");
+                SessionErrors.add(actionRequest, "invalid-data");
+                SessionMessages.add(actionRequest, PortalUtil.getPortletId(actionRequest)
+                        + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
             }
 
+            actionResponse.setRenderParameter("mvcPath", "/edit.jsp");
         }
     }
 
