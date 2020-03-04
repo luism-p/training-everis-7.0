@@ -1,6 +1,8 @@
 package com.liferay.training.customers.actionCommand;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -21,6 +23,9 @@ import javax.portlet.PortletException;
         },
         service = MVCActionCommand.class)
 public class CustomerActionCommandRemove implements MVCActionCommand {
+
+    Log LOG = LogFactoryUtil.getLog(CustomerActionCommandRemove.class);
+
     @Reference
     private CustomerLocalService _customerLocalService;
 
@@ -42,8 +47,9 @@ public class CustomerActionCommandRemove implements MVCActionCommand {
                 SessionMessages.add(actionRequest, "success");
             } catch (PortalException e) {
 
-                e.printStackTrace();
+                LOG.debug("error prtletException: "+ e.getClass()+" ->  "+e.getMessage());
             }
+
         }
     }
 }
