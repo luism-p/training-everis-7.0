@@ -17,7 +17,7 @@ public class Bean {
 
     public Bean() {
         name = StringPool.BLANK;
-        lastName = StringPool.BLANK;
+        lastName = StringPool.DASH;
     }
 
     public String getName() {
