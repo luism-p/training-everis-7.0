@@ -1,6 +1,9 @@
 package com.liferay.training.customers.render;
 
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -10,19 +13,24 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.trainin.customers.model.Customer;
 import com.liferay.trainin.customers.service.CustomerLocalService;
+import com.liferay.training.customers.bean.Bean;
 import com.liferay.training.customers.constants.CustomersConstans;
-import jdk.jfr.events.FileReadEvent;
+import com.luis.impl.GenericUtils;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import java.util.Iterator;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 @Component(
         immediate = true,
@@ -33,7 +41,7 @@ import java.util.concurrent.atomic.AtomicInteger;
         service = MVCRenderCommand.class
 )
 public class CustomerRenderCommand implements MVCRenderCommand {
-    private static final Log log = LogFactoryUtil.getLog(CustomerRenderCommand.class);
+    private static final Log _log = LogFactoryUtil.getLog(CustomerRenderCommand.class);
 
     @Reference
     private CustomerLocalService _customerLocalService;
@@ -64,6 +72,12 @@ public class CustomerRenderCommand implements MVCRenderCommand {
 
             List<Customer> customers = _customerLocalService.getCustomers(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
             renderRequest.setAttribute(CustomersConstans.LIST_CUSTOMERS, customers);
+
+            String json = "[{\"name\":\"luis\",\"hijos\":[{\"name\":\"Abril\",\"lastName\":\"Perez Janel\"},{\"name\":\"Luis\",\"lastName\":\"Perez\"}]},{\"name\":\"luismi\",\"lastName\":\"pacheco\"},{\"name\":\"luisa\",\"lastName\":\"gutierrez\"},{\"name\":\"Cristina\",\"lastName\":\"Moro\",\"hijos\":[{\"name\":\"Abril\",\"lastName\":\"Janel\"},{\"name\":\"Abril\",\"lastName\":\"Perez \"}]}]";
+            Type listType = new TypeToken<List<Bean>>() {}.getType();
+            List<Bean> bean = GenericUtils.jsonToBean(json, listType);
+
+            bean.stream().filter(Validator::isNotNull).forEach(System.out::println);
 
             return CustomersConstans.VIEW_JSP;
         }

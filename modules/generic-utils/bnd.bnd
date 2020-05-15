@@ -1,0 +1,4 @@
+Bundle-Name: generic-utils
+Bundle-SymbolicName: com.luis
+Bundle-Version: 1.0.0
+Export-Package:\com.luis.impl
