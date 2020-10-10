@@ -1,0 +1,4 @@
+Bundle-Name: everis-tools
+Bundle-SymbolicName: com.everis.training.tools
+Bundle-Version: 1.0.0
+Export-Package: com.everis.training.tools.constants

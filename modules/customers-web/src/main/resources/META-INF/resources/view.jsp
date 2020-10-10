@@ -1,4 +1,5 @@
-<%@ include file="/init.jsp" %>
+<%@ taglib prefix="aui" uri="http://liferay.com/tld/aui" %>
+<%@ include file="./init.jsp" %>
 
 <liferay-ui:success key="customer-deleted" message="Customer deled successfully!"/>
 <liferay-ui:error key="could-not-delete" message="Customer not deleted!"/>

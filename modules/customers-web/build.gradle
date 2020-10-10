@@ -9,4 +9,5 @@ dependencies {
 
 	compileOnly project(":modules:generic-utils")
 	compileInclude group: "com.google.code.gson", name: "gson", version: "2.7"
+
 }
